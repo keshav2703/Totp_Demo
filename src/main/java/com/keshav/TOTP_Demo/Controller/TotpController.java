@@ -1,6 +1,6 @@
 package com.keshav.TOTP_Demo.Controller;
 
-import com.keshav.TOTP_Demo.Model.UserBean;
+import com.keshav.TOTP_Demo.Bean.UserBean;
 import com.keshav.TOTP_Demo.Service.ActivateOtpService;
 import com.keshav.TOTP_Demo.Service.GenerateOtpService;
 import com.keshav.TOTP_Demo.Service.UserService;

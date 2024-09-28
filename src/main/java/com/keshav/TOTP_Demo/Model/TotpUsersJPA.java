@@ -46,6 +46,9 @@ public class TotpUsersJPA {
         this.userStatus = userStatus;
     }
 
+    public TotpUsersJPA() {
+    }
+
     @Override
     public String toString() {
         return "TotpUsersJPA{" +

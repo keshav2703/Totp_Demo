@@ -1,4 +1,4 @@
-package com.keshav.TOTP_Demo.Model;
+package com.keshav.TOTP_Demo.Bean;
 
 import org.springframework.stereotype.Component;
 

@@ -26,22 +26,38 @@ public class UserService {
         userBean.setDatetime(localDate.toString());
         userBean.setUserStatus(TotpConstraints.ACTIVATE);
         TotpUsersJPA totpUsersJPA = new TotpUsersJPA();
-        totpUsersJPA.setUserName(userBean.getUserName());
+        String user = userBean.getUserName();
+        totpUsersJPA.setUserName(user);
         totpUsersJPA.setPassword(userBean.getPassword());
         totpUsersJPA.setDate(userBean.getDatetime());
         totpUsersJPA.setUserStatus(userBean.getUserStatus());
-        totpUsersRepo.save(totpUsersJPA);
+        if (totpUsersRepo.findById(user).isEmpty()) {
+            totpUsersRepo.save(totpUsersJPA);
 
-        String user = userBean.getUserName();
-        if (totpUsersRepo.findById(user).isPresent()){
-            userInitResponseBean.setUserName(user);
-            userInitResponseBean.setMessage(TotpConstraints.USER_ADDED);
-            userInitResponseBean.setStatus(TotpConstraints.SUCCESS);
-            return userInitResponseBean;
+
+            if (totpUsersRepo.findById(user).isPresent()) {
+                userInitResponseBean.setUserName(user);
+                userInitResponseBean.setMessage(TotpConstraints.USER_ADDED);
+                userInitResponseBean.setStatus(TotpConstraints.SUCCESS);
+                return userInitResponseBean;
+            } else {
+                userInitResponseBean.setUserName(user);
+                userInitResponseBean.setMessage(TotpConstraints.USER_NOT_ADDED);
+                userInitResponseBean.setStatus(TotpConstraints.FAILED);
+                return userInitResponseBean;
+            }
         }else {
-            userInitResponseBean.setUserName(user);
-            userInitResponseBean.setMessage(TotpConstraints.USER_NOT_ADDED);
-            userInitResponseBean.setStatus(TotpConstraints.FAILED);
+            if(totpUsersRepo.findById(user).get().getUserStatus().equals(TotpConstraints.LOCK)){
+                totpUsersRepo.save(totpUsersJPA);
+                userInitResponseBean.setUserName(user);
+                userInitResponseBean.setMessage(TotpConstraints.UNLOCKED);
+                userInitResponseBean.setStatus(TotpConstraints.SUCCESS);
+
+            }else {
+                userInitResponseBean.setUserName(user);
+                userInitResponseBean.setMessage(TotpConstraints.NOT_UNLOCKED);
+                userInitResponseBean.setStatus(TotpConstraints.FAILED);
+            }
             return userInitResponseBean;
         }
 

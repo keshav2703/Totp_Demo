@@ -1,7 +1,7 @@
 package com.keshav.TOTP_Demo.Service;
 
 import com.keshav.TOTP_Demo.Constraints.TotpConstraints;
-import com.keshav.TOTP_Demo.Model.TotpUsersJPA;
+import com.keshav.TOTP_Demo.Model.TotpUsersDAO;
 import com.keshav.TOTP_Demo.Bean.UserBean;
 import com.keshav.TOTP_Demo.Bean.UserInitResponseBean;
 import com.keshav.TOTP_Demo.Repo.TotpUsersRepo;
@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Service
 public class UserService {
@@ -22,17 +23,17 @@ public class UserService {
 
 
     public Object userInit(UserBean userBean) {
-        LocalDate localDate = LocalDate.now();
+        LocalDateTime localDate = LocalDateTime.now();
         userBean.setDatetime(localDate.toString());
         userBean.setUserStatus(TotpConstraints.ACTIVATE);
-        TotpUsersJPA totpUsersJPA = new TotpUsersJPA();
+        TotpUsersDAO totpUsersDAO = new TotpUsersDAO();
         String user = userBean.getUserName();
-        totpUsersJPA.setUserName(user);
-        totpUsersJPA.setPassword(userBean.getPassword());
-        totpUsersJPA.setDate(userBean.getDatetime());
-        totpUsersJPA.setUserStatus(userBean.getUserStatus());
+        totpUsersDAO.setUserName(user);
+        totpUsersDAO.setPassword(userBean.getPassword());
+        totpUsersDAO.setDate(userBean.getDatetime());
+        totpUsersDAO.setUserStatus(userBean.getUserStatus());
         if (totpUsersRepo.findById(user).isEmpty()) {
-            totpUsersRepo.save(totpUsersJPA);
+            totpUsersRepo.save(totpUsersDAO);
 
 
             if (totpUsersRepo.findById(user).isPresent()) {
@@ -48,7 +49,7 @@ public class UserService {
             }
         }else {
             if(totpUsersRepo.findById(user).get().getUserStatus().equals(TotpConstraints.LOCK)){
-                totpUsersRepo.save(totpUsersJPA);
+                totpUsersRepo.save(totpUsersDAO);
                 userInitResponseBean.setUserName(user);
                 userInitResponseBean.setMessage(TotpConstraints.UNLOCKED);
                 userInitResponseBean.setStatus(TotpConstraints.SUCCESS);

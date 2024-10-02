@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class TotpUsersJPA {
+public class TotpUsersDAO {
     @Id
     String userName;
     String password;
@@ -46,7 +46,7 @@ public class TotpUsersJPA {
         this.userStatus = userStatus;
     }
 
-    public TotpUsersJPA() {
+    public TotpUsersDAO() {
     }
 
     @Override
@@ -59,7 +59,7 @@ public class TotpUsersJPA {
                 '}';
     }
 
-    public TotpUsersJPA(String userName, String password, String date, String userStatus) {
+    public TotpUsersDAO(String userName, String password, String date, String userStatus) {
         this.userName = userName;
         this.password = password;
         this.date = date;

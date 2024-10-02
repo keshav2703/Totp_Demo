@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "activates")
-public class TotpActivateJPA {
+public class TotpActivateDAO {
     @Id
     String userName;
     String datetime;
@@ -66,7 +66,10 @@ public class TotpActivateJPA {
         this.password = password;
     }
 
-    public TotpActivateJPA(String userName, String datetime, String secret, String otp, String password) {
+    public TotpActivateDAO() {
+    }
+
+    public TotpActivateDAO(String userName, String datetime, String secret, String otp, String password) {
         this.userName = userName;
         this.datetime = datetime;
         this.secret = secret;

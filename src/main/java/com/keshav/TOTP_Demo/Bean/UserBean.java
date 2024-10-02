@@ -8,6 +8,16 @@ public class UserBean {
     String password;
     String secret;
     String otp;
+    String deviceId;
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
+
     String datetime;
     String userStatus;
 

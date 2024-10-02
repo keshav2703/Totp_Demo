@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "7b1e5703-aa92-4b9e-ae9a-40d732c8919f",
+		"name": "TOTP_Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38742974"
+	},
+	"item": [
+		{
+			"name": "http://localhost:9999/usersInit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\":\"123456\",\r\n    \"password\":\"Pass@123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9999/usersInit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"usersInit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9999/activateOtp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\":\"123456\",\r\n    \"password\":\"Pass@123\",\r\n    \"deviceId\":\"Android\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9999/activateOtp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"activateOtp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9999/generateOtp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\":\"123456\",\r\n    \"secret\":\"I3B3NMBFD5SXSJ3N\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9999/generateOtp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"generateOtp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9999/validateOtp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\":\"123456\",\r\n    \"otp\":\"558723\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9999/validateOtp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9999",
+					"path": [
+						"validateOtp"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
